@@ -3,11 +3,12 @@ var camera = _camera([0, 0], 1);
 var mouse = _mouseState();
 var doUpdate = false;
 
-const tmax = 30;        // length of trail
-const spread = 500;     // spread of bodies
-const total = 500;      // total number of bodies
-const v_spread = 50;    // spread of velocity
-const m_spread = 100;   // mass spread
+const tmax = 30;            // length of trail
+const spread = 500;         // spread of bodies
+const total = 500;          // total number of bodies
+const v_spread = 50;        // spread of velocity
+const m_spread = 100;       // mass spread
+const m_black_hole = 50000; // the black hole!
 
 const _genv = () => [_randns(spread), _randns(spread)];
 
@@ -18,7 +19,7 @@ const _genp = () => {
 };
 
 var pts = Array.from({ length: total }, () => _genp());
-pts.push(_particle(50000, _cald(50000, 10), [0, 0], [0, 0], tmax));  // a black hole!
+pts.push(_particle(m_black_hole, _cald(m_black_hole, 10), [0, 0], [0, 0], tmax));  // a black hole!
 
 ctx.canvas.addEventListener("wheel", (e) => {
   camera = camera.zoom([e.x, e.y], e.deltaY > 0 ? 0.9 : 1.1);
